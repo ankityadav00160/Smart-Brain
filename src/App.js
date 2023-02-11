@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import Navigation from './Components/Navigation/Navigation.js'
 import Logo from './Components/Logo/Logo.js'
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm.jsx'

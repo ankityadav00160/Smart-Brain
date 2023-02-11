@@ -1,20 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import './ImageLinkForm.css'
 
-const ImageLinkForm = () =>{
-
-    const [setValue] = useState("")
-
-    const handleChange = (value) =>{
-        setValue(value);
-        // console.log("value1-----",value1);
-        // console.log("value1-----",value);
-    }
-
-    const click = ()=>{
-        console.log('click');
-    }
-
+const ImageLinkForm = ({onInputChange,onButtonSumbit}) =>{
     return( 
         <>
             <p className="f3">
@@ -22,8 +9,9 @@ const ImageLinkForm = () =>{
             </p>
             <div className="center">
                 <div className=" form center pa4 br3 shadow-5">
-                    <input onChange={(e)=>handleChange(e.target.value)} className="f4 pa2 w-70 center" type= 'text'/>
-                    <button onClick={()=>click()} className="w-30 grow f4 link ph3 pv2 dib white bg-light-purple">Detect</button>
+                    <input className="f4 pa2 w-70 center" type= 'text' onChange={onInputChange} />
+                    <button className="w-30 grow f4 link ph3 pv2 dib white bg-light-purple" 
+                    onClick={onButtonSumbit}>Detect</button>
                 </div>
             </div>
         </>

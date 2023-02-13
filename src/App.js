@@ -22,55 +22,53 @@ class App extends Component {
   onButtonSumbit = () =>{
     console.log('click');
 
-    const USER_ID = "d434ce68718343a7a4490ed2e282e405"
+    const PAT = 'd271ca98cf5e443a9ca40fe686ff3299';
+    // Specify the correct user_id/app_id pairings
+    // Since you're making inferences outside your app's scope
+    const USER_ID = 'd434ce68718343a7a4490ed2e282e405';       
+    const APP_ID = 'my-first-application';
+    // Change these to whatever model and image URL you want to use
+    const MODEL_ID = 'general-image-recognition';
+    const MODEL_VERSION_ID = 'aa7f35c01e0642fda5cf400f543e7c40';    
+    const IMAGE_URL = 'https://samples.clarifai.com/metro-north.jpg';
 
-    const PAT = "d271ca98cf5e443a9ca40fe686ff3299"
+    ///////////////////////////////////////////////////////////////////////////////////
+    // YOU DO NOT NEED TO CHANGE ANYTHING BELOW THIS LINE TO RUN THIS EXAMPLE
+    ///////////////////////////////////////////////////////////////////////////////////
 
-    const APP_ID = "my-first-application"
+    const raw = JSON.stringify({
+        "user_app_id": {
+            "user_id": USER_ID,
+            "app_id": APP_ID
+        },
+        "inputs": [
+            {
+                "data": {
+                    "image": {
+                        "url": IMAGE_URL
+                    }
+                }
+            }
+        ]
+    });
 
-    const MODEL_ID = "face-detection";
-  const MODEL_VERSION_ID = "45fb9a671625463fa646c3523a3087d5";
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Key ' + PAT
+        },
+        body: raw
+    };
 
-  const IMAGE_URL = this.state.input;
+    // NOTE: MODEL_VERSION_ID is optional, you can also call prediction with the MODEL_ID only
+    // https://api.clarifai.com/v2/models/{YOUR_MODEL_ID}/outputs
+    // this will default to the latest version_id
 
-  const raw = JSON.stringify({
-    user_app_id:{
-      user_id: USER_ID,
-      app_id: APP_ID,
-    },
-    inputs:[{
-      data:{
-        image:{
-          url:IMAGE_URL,
-        }
-      }
-    }]
-  })
-
-  const requestOptions = {
-    method: "POST",
-    headers:{
-      Accept: "application/json",
-      Authorization: "Key" + PAT,
-    },
-    body: raw,
-  };
-
-  fetch(
-    "https://api.clarifai.com/v2/models/"+
-    MODEL_ID +
-    "/versions/" +
-    MODEL_VERSION_ID +
-    "/outputs",
-    requestOptions
-  )
-
-  .then((response) => response.json())
-  .then((result) =>
-  console.log(result)
-  )
-
-  .catch((error) => console.log("error", error))
+    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
 
   }
 

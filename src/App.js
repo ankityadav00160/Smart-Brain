@@ -80,7 +80,7 @@ class App extends Component {
       <Logo/>
       <Rank/>
       <ImageLinkForm  onInputChange={this.onInputChange} onButtonSumbit={this.onButtonSumbit}/>
-      {/* <FaceRecoginition/> */}
+      <FaceRecoginition/>
     </div>
   );
 }

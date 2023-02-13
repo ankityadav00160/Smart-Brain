@@ -4,6 +4,7 @@ import Navigation from './Components/Navigation/Navigation.js'
 import Logo from './Components/Logo/Logo.js'
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm.jsx'
 import Rank from './Components/Rank/Rank.js'
+import FaceRecoginition from './Components/FaceRecoginition/FaceRecoginition'
 
 class App extends Component {
 

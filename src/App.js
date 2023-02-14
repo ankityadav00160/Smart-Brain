@@ -11,25 +11,28 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      input:''
+      input:'',
+      imageUrl:''
     }
   }
 
   onInputChange = (event) =>{
-    console.log(event.target.value);
+    // console.log(event.target.value);
+    this.setState({input:event.target.value})
   }
 
-  onButtonSumbit = () =>{
-    console.log('click');
+  onButtonSumbit = () =>{ 
+    // console.log("click");
+    this.setState({imageUrl:this.state.input})
 
     const PAT = 'd271ca98cf5e443a9ca40fe686ff3299';
     // Specify the correct user_id/app_id pairings
     // Since you're making inferences outside your app's scope
-    const USER_ID = 'd434ce68718343a7a4490ed2e282e405';       
+    const USER_ID = 'ankit00160';       
     const APP_ID = 'my-first-application';
     // Change these to whatever model and image URL you want to use
-    const MODEL_ID = 'general-image-recognition';
-    const MODEL_VERSION_ID = 'aa7f35c01e0642fda5cf400f543e7c40';    
+    const MODEL_ID = 'face-detection';
+    const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';    
     const IMAGE_URL = 'https://samples.clarifai.com/metro-north.jpg';
 
     ///////////////////////////////////////////////////////////////////////////////////
@@ -69,6 +72,7 @@ class App extends Component {
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
+    
 
   }
 
@@ -79,7 +83,7 @@ class App extends Component {
       <Logo/>
       <Rank/>
       <ImageLinkForm  onInputChange={this.onInputChange} onButtonSumbit={this.onButtonSumbit}/>
-      <FaceRecoginition/>
+      <FaceRecoginition imageUrl={this.state.imageUrl}/>
     </div>
   );
 }
